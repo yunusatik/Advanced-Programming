@@ -54,8 +54,8 @@
 "use strict";
 function makeRows() 
 {
-    const L = [0.5, 1, 1.5, 2, 2.5, 3];
     const p = [];
+    const L = [0.5, 1, 1.5, 2, 2.5, 3];    
     
     let yatay = "<th></th>"; 
     for (let a = 0; a < L.length; a++) 
@@ -63,7 +63,7 @@ function makeRows()
         p[a] = (Math.exp(-1 * (L[a]))).toFixed(4);
     }
 
-    for (let b = 0; b < L.length; b += 1) 
+    for (let b = 0; b < L.length; b ++) 
     {
         yatay += "<th>" + "λ=" + ((b / 2) + 0.5) + "</th>";
     }
