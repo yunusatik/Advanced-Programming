@@ -27,6 +27,16 @@
 <h2>data-weekend (First_Example_2)</h2>
 <textarea id="data1" name="w3review" rows="4" cols="50"></textarea>
 <button onclick="first_Example_2()">first_Example_2</button>
+    
+ <h2>Converter (Second_Example)</h2>
+<p>
+  <label>cm</label>
+  <input id="inputcm" type="number" placeholder="cm" oninput="convert(this.value)">
+</p>
+<p>
+<label>Inches</label>
+<input id="inputInches" type="number" placeholder="Inches" oninput="LengthConverterinch(this.value)">
+</p>
 
 <link  href="https://maeyler.github.io/JS/sss/inspector.css" rel="stylesheet">
 <script src="https://maeyler.github.io/JS/sss/inspector.js"></script>
@@ -59,7 +69,7 @@ function first_Example_2(){
       }
     }
 }
-function LengthConvertercm(valNum) {
+function convert(valNum) {
   let num = new Lenght(valNum);
   document.getElementById("inputInches").value =num.inch;
 }function LengthConverterinch(valNum) {
@@ -78,7 +88,8 @@ function LengthConvertercm(valNum) {
   static fromInch(value) {
     return new Lenght((value / 0.39370));
   }
-}    
+}
+
 
 class Chap4 extends Menu {
   constructor() {
