@@ -57,17 +57,13 @@ function first_Example_1()
     }    
 }
 function first_Example_2(){
-  let m = new Map();
-    for (let x of JOURNAL){
-      n = 0;
+  for (let x of JOURNAL){
       for (let y of x.events){
-        if (y.includes("weekend")){
-          //let n = m.get(y);
-          m.set(x, n+1);
-          data1.innerText.value 
-        } 
+        if (y.includes(data1.innerText.value) || y.includes("weekend")){
+          document.getElementById('data1').value +=x.events+'\n';
+        }
       }
-    }
+    } 
 }
 function convert(valNum) {
   let num = new Lenght(valNum);
