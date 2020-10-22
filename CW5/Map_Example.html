@@ -40,11 +40,11 @@ function first_Example_1()
 {
     for (let x of JOURNAL){
       for (let y of x.events){
-        if (!y.includes("work") || !y.includes("weekend")){
-          document.getElementById('data').value +=x.events+'\n';
+        if (y.includes("work") || y.includes("weekend")){
+         document.getElementById('data').value +=x.events+'\n';
         }
       }
-    }    
+    }  
 }
 function first_Example_2(){
   let m = new Map();
