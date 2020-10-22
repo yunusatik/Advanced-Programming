@@ -58,16 +58,13 @@ function makeRows()
     const p = [];
 
     let row = "<th></th>";
-    for (let j = 0; j < L.length; j += 1) 
+    for (let j = 0; j < L.length; j++) 
     {
         row += "<th>" + "λ=" + ((j / 2) + 0.5) + "</th>"; 
-    }
-    for (let i = 0; i < L.length; i++) 
-    {
-        p[i] = (Math.exp(-1 * (L[i]))).toFixed(4);
+        p[j] = (Math.exp(-1 * (L[j]))).toFixed(4);
     }
     let text = "<tr>" + row + "</tr>";
-    for (let i = 0; i <= 8; i++) 
+    for (let i = 0; i <= 8; i++)
     {
         row = "<th>" + "x=" + (i) + "</th>";
         for (let k = 1; k <= p.length; k++) 
