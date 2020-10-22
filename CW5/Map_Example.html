@@ -41,7 +41,7 @@ function first_Example_1()
     for (let x of JOURNAL){
       for (let y of x.events){
         if (!y.includes("work") || !y.includes("weekend")){
-          data.innerText += x.events+'\n';
+          document.getElementById('data').value +=x.events+'\n';
         }
       }
     }    
@@ -59,6 +59,26 @@ function first_Example_2(){
       }
     }
 }
+function LengthConvertercm(valNum) {
+  let num = new Lenght(valNum);
+  document.getElementById("inputInches").value =num.inch;
+}function LengthConverterinch(valNum) {
+  var num = Lenght.fromInch(valNum).cm;
+  document.getElementById("inputcm").value =num;
+}class Lenght {
+  constructor(cm) {
+    this.cm = cm;
+  }
+  get inch() {
+    return this.cm * 0.39370;
+  }
+  set inch(value) {
+    this.celsius = value / 0.39370;
+  }
+  static fromInch(value) {
+    return new Lenght((value / 0.39370));
+  }
+}    
 
 class Chap4 extends Menu {
   constructor() {
