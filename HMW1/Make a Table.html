@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" sizes="192x192" href="https://maeyler.github.io/JS/images/JS.png">
+    <title> Make a Table (From Yunus Emre Atik) </title>
+
+  <style>
+    body { max-width: 540px; }
+    #sample { overflow-x: auto; }
+    table { border-collapse: collapse; }
+    th { 
+        color: blue; padding: 10px 10px; 
+        background-color: pink;
+
+    }
+    td { 
+        border: 1px solid blue; 
+        background-color: aqua;
+        padding: 5px 5px; 
+        text-align: start; 
+        position: relative;
+    }
+    td:hover .tip {
+        visibility: visible;
+    }
+    td .tip {
+        visibility: hidden;
+        font-size: small;
+        background-color: blue;
+        color: white;
+        text-align: center;
+        padding: 5px 5px;
+        position: absolute;
+        left: 5px; 
+        top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+<center>
+<h2 id="title">Make a Table</h2>
+<table id="tablo"><tbody><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr><tr><th>1</th><td>1,1<span class="tip">C1</span></td><td>1,2<span class="tip">C2</span></td><td>1,3<span class="tip">C3</span></td><td>1,4<span class="tip">C4</span></td><td>1,5<span class="tip">C5</span></td></tr><tr><th>2</th><td>2,1<span class="tip">C6</span></td><td>2,2<span class="tip">C7</span></td><td>2,3<span class="tip">C8</span></td><td>2,4<span class="tip">C9</span></td><td>2,5<span class="tip">C10</span></td></tr><tr><th>3</th><td>3,1<span class="tip">C11</span></td><td>3,2<span class="tip">C12</span></td><td>3,3<span class="tip">C13</span></td><td>3,4<span class="tip">C14</span></td><td>3,5<span class="tip">C15</span></td></tr></tbody></table>
+
+</center>
+
+<hr>
+<b>Sample code</b>
+<pre id="sample">function makeRows(m, n) {<br>    let row = "&lt;th&gt;&lt;/th&gt;";<br>    for (let j = 1; j &lt;= n; j++) <br>        row += "&lt;th&gt;"+j+"&lt;/th&gt;";<br>    let text = "&lt;tr&gt;"+row+"&lt;/tr&gt;";<br>    for (let i = 1; i &lt;= m; i++) {<br>       row = "&lt;th&gt;"+i+"&lt;/th&gt;";<br>       for (let j = 1; j &lt;= n; j++) {<br>          let p = n*(i-1)+j;<br>          let s = "&lt;span class=tip&gt;C"+p+"&lt;/span&gt;"<br>          row += "&lt;td&gt;"+i+","+j+s+"&lt;/td&gt;";<br>       }<br>       text += "&lt;tr&gt;"+row+"&lt;/tr&gt;";<br>    }<br>    let t = text.length+" chars";<br>    console.log("makeRows: "+m+"x"+n+" "+t);<br>    tablo.innerHTML = text; out.innerText = t; <br>}</pre>
+<hr>
+
+<script>
+"use strict";
+function makeRows() 
+{
+    const L = [0.5, 1, 1.5, 2, 2.5, 3];
+    const p = [];
+
+    let row = "<th></th>";
+    for (let j = 0; j < L.length; j += 1) 
+    {
+        row += "<th>" + "λ=" + ((j / 2) + 0.5) + "</th>"; 
+    }
+    for (let i = 0; i < L.length; i++) 
+    {
+        p[i] = (Math.exp(-1 * (L[i]))).toFixed(4);
+    }
+    let text = "<tr>" + row + "</tr>";
+    for (let i = 0; i <= 8; i++) 
+    {
+        row = "<th>" + "x=" + (i) + "</th>";
+        for (let k = 1; k <= p.length; k++) 
+        {
+            row += "<td>" + p[k - 1] + "</td>";
+            let f = p[i]
+            p[k - 1] = ((L[k - 1] * p[k - 1]) / (i + 1)).toFixed(4);
+        }
+        text += "<tr>" + row + "</tr>";
+    }
+        tablo.innerHTML = text; out.innerText = t;
+}
+function tableFromMenu() {
+    let [m, n] = size.value.split("x");
+    makeRows(m, n); //a[0], a[1]
+    rows.value = m;
+    cols.value = n;
+}
+function tableFromInput() {
+    let m = rows.value;
+    let n = cols.value;
+    makeRows(m, n);
+    size.value = m+"x"+n;
+}
+    title.innerText = document.title;
+    sample.innerText = makeRows.toString();
+    makeRows(3, 5);
+</script>
+</body></html>
