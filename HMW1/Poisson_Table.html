@@ -66,9 +66,9 @@ function makeRows()
         p[a] = (Math.exp(-1 * (L[a]))).toFixed(4);
     }
 
-    for (let b = 0; b < L.length; b ++) 
+    for (let j = 0.5; j <= L.length/2; j +=0.5)
     {
-        yatay += "<th>" + "λ=" + ((b / 2) + 0.5) + "</th>";
+        row += "<th>" + "λ=" + (j) + "</th>";               
     }
 
     let text = "<tr>" + yatay + "</tr>";
@@ -78,7 +78,6 @@ function makeRows()
         for (let c = 1; c <= p.length; c++) 
         {
             yatay += "<td>" + p[c - 1] + "</td>";
-            let i = p[a]
             p[c - 1] = ((L[c - 1] * p[c - 1]) / (a + 1)).toFixed(4);
         }
         text += "<tr>" + yatay + "</tr>";
