@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- saved from url=(0076)https://eneskzlcn.github.io/AdvancedPrograming/Classworks/CW8/FileWorks.html -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="https://blm-fsmvu.github.io/305/images/icon192.png">
+    <title>Remote and Local Files </title>
+    <style>
+        body { max-width: 500px; }
+        #remote { width: 90%; }
+    </style>
+</head>
+
+<body>
+<p><b id="docName">Remote and Local Files</b> &nbsp; <a href="https://blm-fsmvu.github.io/305/work/Reading_files">Reference</a>
+</p>
+<p>Remote file <br>
+  <input type="text" id="remote" size="35" value="../images/objects.png">
+</p>
+<p><input type="file" id="local" multiple="" onchange="fileSelect()"></p>  
+<pre id="out"></pre>
+<hr>
+<b>Sample code</b>
+<pre id="sample">function fileSelect() {<br>    fetch(remote.value).then(r =&gt; r.blob())<br>    .then(checkFiles)<br>}<br>function checkFiles(b) {<br>    let a = [...local.files]<br>    for(let file of a)<br>    {<br>        out.innerText += file.name+","<br>    }<br>    let c = 0<br>    let k = remote.value.split("/");<br>    let remoteFileName = k[k.length-1];<br>    let resultText1 = "\n\n"+ a.length + <br>    ' items checked ' + remoteFileName+' is the same as ';<br>    let resultText2 = "\n\n"+a.length + <br>    'items checked and  all files are different';<br>    a.map(f=&gt;<br>    {<br>        if((b.type == f.type) &amp;&amp; (b.size == f.size))<br>        {<br>            c++;<br>            resultText1+= f.name + ", "<br>        }<br>    })<br>    if(c&gt;0)<br>    {<br>        out.innerText += resultText1;<br>    }<br>    else<br>    {<br>        out.innerText += resultText2;<br>    }<br>}</pre>
+
+<script>
+"use strict";
+function fileSelect() {
+    fetch(remote.value).then(r => r.blob())
+    .then(checkFiles)
+}
+function checkFiles(b) {
+    let a = [...local.files]
+    for(let file of a)
+    {
+        out.innerText += file.name+","
+    }
+    let c = 0
+    let k = remote.value.split("/");
+    let remoteFileName = k[k.length-1];
+    let resultText1 = "\n\n"+ a.length + 
+    ' items checked ' + remoteFileName+' is the same as ';
+    let resultText2 = "\n\n"+a.length + 
+    'items checked and  all files are different';
+    a.map(f=>
+    {
+        if((b.type == f.type) && (b.size == f.size))
+        {
+            c++;
+            resultText1+= f.name + ", "
+        }
+    })
+    if(c>0)
+    {
+        out.innerText += resultText1;
+    }
+    else
+    {
+        out.innerText += resultText2;
+    }
+}
+const L = console.log
+docName.innerText = document.title
+sample.innerText = fileSelect+"\n"+checkFiles
+</script>
+
+
+</body></html>
