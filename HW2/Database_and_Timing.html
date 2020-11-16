@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+    <!-- saved from url=(0073)https://mesutyilmaz01.github.io/Apt/%C3%96devler/Homework2/homework2.html -->
+    <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta name="viewport" content="width=device-width">
+        <link rel="icon" href="https://blm-fsmvu.github.io/305/images/icon192.png">
+        <title>Database and Timing</title>
+
+    <style>
+            body { max-width: 440px;background:lightsteelblue; }
+            .link {
+                color: red;
+                cursor: pointer;
+                font-style: italic;
+            }
+            .liste {
+                visibility: hidden;
+                font: 11px arial, sans-serif;
+                color: white;
+                background: blue;
+                cursor: text;
+                padding: 6px;
+                position: absolute;
+                height: 116px;
+                overflow-y: auto;
+            }z
+            .link:hover .liste { 
+                visibility: visible; 
+            }
+            #maps{color: white;background: royalblue;height: 23px;width:68%;}
+            #btn_eski{color: white;background: blue;height: 23px;width: 22%;}
+            #title {color: mediumblue;}
+            #txt_first {color: blanchedalmond;background:chocolate ;font-size: 17px;height: 20px;}
+            #txt_second {color: blanchedalmond;background:chocolate ;font-size: 17px;height: 20px;}
+            #txt_third {color: blanchedalmond;background:chocolate ;font-size: 17px;height: 20px;}
+            #txt_fourth {color: blanchedalmond;background:chocolate ;font-size: 17px;height: 20px;}
+            #txt_fifth {color: blanchedalmond;background:chocolate ;font-size: 17px;height: 20px;}
+            #btn {color: white;background: blue;height: 23px;}
+            #out {color: yellow;background: rgb(102, 86, 86);}
+    </style>
+    </head>
+
+    <body>
+
+        <h1 id="title">DATABASE AND TİMİNG</h1>
+
+        <button id=btn_eski onclick="randomStd()">Random</button>
+        <button id=btn_eski onclick="findBest()">Best GPA</button>
+        <button id=btn_eski onclick="out.innerText=&quot;&quot;">Clear</button>
+        <p></p>
+        <strong>- - - - - - - -  BİRİNCİ KISIM - - - - - - - -</strong>
+        <p>→ Exam Schedule For a Given Student ←<br>
+            <input id="txt_first" type="number" value="215151514" >
+            <button id=btn onclick="exam_Schedule_Given_Student()">SEARCH</button>
+        </p>
+        <p>→ Student List Taking a Given Course ←<br>   
+            <input id="txt_second" type="text" value="UNIT 102">
+            <button id=btn onclick="student_List_Taking_Given_Course()">SEARCH</button>
+        </p>
+        <p>→ Course List For a Given Exam Room ←<br>
+            <input id="txt_third" type="text" value="BZ010">
+            <button id=btn onclick="course_List_Given_Exam_Room()">SEARCH</button>
+        </p>
+        <p>→ Total Courses In a Given Room ←<br>
+            <input id="txt_fourth" type="text" value="BZ010">
+            <button id=btn onclick="total_Courses_Given_Room()">SEARCH</button>
+        </p>
+        <p>→ Course List For a Given Date ←<strong>EKSTRA</strong><br>
+            <input id="txt_fifth" type="text" value="4.01.2017">
+            <button id=btn onclick="course_List_Given_Date()">SEARCH</button>
+        </p>
+        <strong>- - - - - - - -  İKİNCİ KISIM - - - - - - - -</strong>
+        <p></p>
+            <button id=maps onclick="data_Sets_Comparison()">Data Sets Compare</button>
+
+            <p id="out" onclick="doClick(event)">→ Result
+        <hr>
+            <b>Sample code</b>
+            <pre id="sample">class Course {<br>constructor(id,time,date,...list) {<br>if(!id) throw "Undefined Course id"<br>
+                    this.id = id;<br>this.time = time;<br>this.date = date;<br>this.list = list;<br>}
+                    <br>toString() {<br>return this.id+' '+' '+this.time+' '+this.date;<br>}<br>static fromString(s) 
+                    {<br>return new Course(...s.split('\t'));<br>}<br>}<br>function readCourses() {<br>fetch(LINK+"Courses.txt").then(r =&gt; r.text())
+                    <br>.then(t =&gt; makeData(t, Course, crsMap))<br>}<br>function findBest() { //the best gpa in stdMap<br>
+                    let bestgGpa = 0 <br>for (let b of stdMap.values()){<br>if(b.gpa &gt; bestgGpa){<br>bestgGpa = b.gpa<br>}
+                    <br>}<br>report(bestgGpa);<br>}<br>function student_List_Taking_Given_Course(){<br>let value = document.getElementById("txt_second").value.toUpperCase();<br>	let counter = 0;<br>	for(let student of stdMap.values()){<br>		if(student.list.includes(value)){<br>			counter++;<br>			if(counter==1) report("Bu Dersi Alan Öğrenciler :");<br>			report("ID : "+student.id+" Adı : "+student.name+" Gpa : "+student.gpa);<br>		}<br>	}<br><br>}<br>function course_List_Given_Exam_Room(){<br>	let value = document.getElementById("txt_third").value.toUpperCase();<br>	let counter = 0;<br>	for(let course of crsMap.values()){<br>		if(course.list.includes(value)){<br>			counter++;<br>			if(counter==1) report("Bu Sınıfta Sınavı Olacak Dersler :");<br>			report("Ders Kodu : "+course.id+" Tarihi : "+course.date+" Saati :"+course.time);<br>		}<br>	}<br>}<br>function total_Courses_Given_Room(){<br>	let counter = 0;<br>	let value = document.getElementById("txt_fourth").value.toUpperCase();<br>	for(let courses of crsMap.values()){<br>		if(courses.list.includes(value)){<br>			counter++;<br>		}<br>	}<br>	if(counter == 0){<br>		report("Bu sınıfta ders yoktur");<br>	}else{<br>		report("Bu sınıfta verilen toplam ders sayısı : "+counter);<br>	}<br>}<br>function course_List_Given_Date(){<br>	let value = document.getElementById("txt_fifth").value.toUpperCase();<br>	let counter = 0;<br>	for(let courses of crsMap.values()){<br>		if(courses.date == value){<br>			counter++;<br>			if(counter==1) report("Girilen Tarihte Sınavı Olacak Dersler :");<br>			report("Ders Kodu : "+courses.id+" Tarihi : "+courses.date+" Saati :"+courses.time);<br>		}<br>	}<br>}<br>function data_Sets_Comparison(){<br>    let student_ID = 116690070;<br>	let has = 0;<br>    let include = 0;<br>	let keys = []; <br>    for (let number of stdMap) {<br>        keys.push(number[0])<br>    }<br>    let has_Time =  Date.now();<br>    for (let index=student_ID; index&lt;student_ID+10000; index++) {<br>        if(stdMap.has(index.toString())){<br>            has+=1;<br>        }<br>    }<br>    has_Time =  Date.now() - has_Time;<br>    let includeTime = Date.now()<br>    for (let index=student_ID; index&lt;student_ID+10000; index++) {<br>        if(keys.includes(index.toString())){<br>            include+=1;<br>        }<br>    }<br>    includeTime =  Date.now() - includeTime;<br>	report("&lt;hr&gt;");<br>    report("has metodu ile çıkan sonuç : "+has)<br>    report("Include metodu ile çıkan sonuç : "+include)<br>    report("has metodu ile algortima zamanı : "+has_Time)<br>    report("Include metodu ile alogirtma zamanı : "+includeTime)<br>	report("&lt;/hr&gt;");
+                    <br><br>}
+            </pre>
+        <hr>
+
+        <script>
+        "use strict";
+        class Student {
+            constructor(id, name, gpa, ...list) {
+                if (!id) throw "Undefined Student id"
+                this.id = id; this.name = name;
+                this.gpa = gpa.padEnd(4,'0'); 
+                this.list = list
+            }
+            toString() {
+                return this.id+' '+this.name+' '+this.gpa
+            }
+            static fromString(s) {
+                return new Student(...s.split('\t'))
+            }
+        }
+        class Course { 
+            constructor(id,time,date,...list) {
+                if(!id) throw "Undefined Course id"
+                this.id = id;
+                this.time = time;
+                this.date = date;
+                this.list = list;
+            }
+            toString() {
+                return this.id+' '+' '+this.time+' '+this.date;
+            }
+            static fromString(s) {
+                return new Course(...s.split('\t'));
+            }
+        }
+        function report(msg, id, list) {
+            msg += " "; let txt = "<br>\n"+msg;
+            if (id) {
+                msg += id; txt += "<span class=link>"+id
+                if (list)  txt += "<span class=liste>"
+                            +list.join("<br>")+"</span>"
+                txt += "</span>"
+            }
+            console.log(msg); out.innerHTML += txt; 
+        }
+        const stdMap = new Map(), crsMap = new Map(); //global
+        function makeData(txt, Maker, map) {
+            map.clear()
+            for (let line of txt.split('\n')) {
+                if (!line) continue
+                let std = Maker.fromString(line)
+                map.set(std.id, std)
+            }
+            report(map.size+" items");
+            return map;
+        }
+        function doClick(evt) {
+            let s = evt.target.innerText;
+            if (/^\d+$/.test(s)) showStudent(s); 
+        }
+        function showStudent(id) {
+            let std = stdMap.get(id);
+            if (!std) return report(id+" not found");
+            let t = std.toString()
+            report(t, "("+std.list.length+" courses)", std.list);
+            return std
+        }
+        function showCourse(id) {
+            id = id.toUpperCase();
+            let a = [];
+            for (let std of stdMap.values()) 
+                if (std.list.includes(id)) 
+                    a.push(std.id+" "+std.name);
+            if (a.length > 0){
+                report(id+": ", a.length+" students", a);
+                report("Saat : " + crsMap.get(id).time)
+                report("Tarih : " +  crsMap.get(id).date)
+                }
+            else report("No students in "+id);
+            return a
+        }
+        function randomStd() {
+            let keys = [...stdMap.keys()]  
+            console.assert(keys.length == stdMap.size)
+            let i = Math.trunc(keys.length * Math.random());
+            let b = stdMap.get(keys[i]);
+            report("Random: ", b.id);
+            return b
+        }
+        function findBest() { 
+            let bestgGpa = 0
+            let std_name; 
+            for (let b of stdMap.values()){
+                if(b.gpa > bestgGpa){
+                    bestgGpa = b.gpa;
+                    b.id=std_name;
+                }
+            }
+            report("En Yüksek GPA : "+bestgGpa);
+        }
+        const LINK = "https://maeyler.github.io/JS/data/"
+        function readStudents() {
+            fetch(LINK+"Students.txt").then(r => r.text())
+            .then(t => makeData(t, Student, stdMap))
+        }
+        function readCourses() {
+            fetch(LINK+"Courses.txt").then(r => r.text())
+            .then(t => makeData(t, Course, crsMap))
+        }
+        function exam_Schedule_Given_Student()
+        {            
+            report("----------------------------------------------------------------------------------");
+            let txt = document.getElementById("txt_first").value;
+            let student = stdMap.get(txt);
+            let std_courses = [];
+            let temp;
+            if (student)
+            { 
+                for(let i=0; i<student.list.length; i++)
+                {
+                    temp = crsMap.get(student.list[i].toString());
+                    if(!temp)
+                    {
+                        return report(txt+" Numaralı Öğrencinin Sistemde Kayıtlı Dersi Bulunamamıştır"); 
+                    }
+                    else
+                    {
+                        std_courses.push(temp);                        
+                    }
+                } 
+                report("→ "+txt+"  No'lu Öğrenciye Ait Sınav Takvimi");
+                for(let course of std_courses){
+                    report("Ders : "+course.id+" \f  Tarih: "+course.date+" \f Saat: "+course.time);
+                }                
+            }
+            else
+            {
+                return report(txt+" No'lu Öğrencinin Sistemde Kayıtlı Bir Sınavı Yoktur.");
+            }
+        }
+        function student_List_Taking_Given_Course()
+        {
+            report("----------------------------------------------------------------------------------");
+            let txt = document.getElementById("txt_second").value.toUpperCase();
+            report("→ "+txt+" Dersini Alan Öğrenciler");
+            for(let student of stdMap.values())
+            {
+                if(student.list.includes(txt))
+                {                    
+                    report("ID : "+student.id+" \f Adı : "+student.name+" \f Gpa : "+student.gpa);
+                }
+            }
+        }
+        function course_List_Given_Exam_Room()
+        {
+            report("----------------------------------------------------------------------------------");
+            let txt = document.getElementById("txt_third").value.toUpperCase();
+            report("→ "+txt+" Sınıfında Sınav Olacak Dersler ");
+            for(let course of crsMap.values())
+            {
+                if(course.list.includes(txt))
+                {
+                    report("Ders Kodu : "+course.id+" \f Tarihi : "+course.date+" \f Saati :"+course.time);
+                }
+            }
+        }
+        function total_Courses_Given_Room()
+        {
+            report("----------------------------------------------------------------------------------");
+            let counter = 0;
+            let txt = document.getElementById("txt_fourth").value.toUpperCase();
+            for(let courses of crsMap.values())
+            {
+                if(courses.list.includes(txt))
+                {
+                    counter++;
+                }
+            }
+            report("→ "+txt+" Sınıfında Verilen Toplam Ders Sayısı : "+counter);            
+        }
+        function course_List_Given_Date()
+        {
+            report("----------------------------------------------------------------------------------");
+            let txt = document.getElementById("txt_fifth").value.toUpperCase();
+            report("→ "+txt+" Tarihinde Sınavı Olan Dersler :");
+            for(let courses of crsMap.values())
+            {
+                if(courses.date == txt)
+                {
+                    report("Ders Kodu : "+courses.id+" \f Tarihi : "+courses.date+" \f Saati :"+courses.time);
+                }
+            }
+        }
+        function data_Sets_Comparison()
+        {
+            report("----------------------------------------------------------------------------------");
+            report("→ DATA SETS COMPARE");
+            let student_ID = 215170000;
+            let has_Method = 0;
+            let include_Method = 0;
+            let keys = []; 
+            for (let number of stdMap) 
+            {
+                keys.push(number[0])
+            }
+            let has_Time = Date.now();
+            for (let index=student_ID; index<student_ID+10000; index++) 
+            {
+                if(stdMap.has(index.toString()))
+                {
+                    has_Method++;
+                }
+            }
+            has_Time = Date.now() - has_Time;
+            let includeTime = Date.now()
+            for (let index=student_ID; index<student_ID+10000; index++) 
+            {
+                if(keys.includes(index.toString()))
+                {
+                    include_Method++;
+                }
+            }
+            includeTime =  Date.now() - includeTime;
+            report("has Metodu Sonuç : "+has_Method+" \f has Algoritma Zamanı : "+has_Time)
+            report("Include Metodu Sonuç : "+include_Method+" \f Include Algoritma Zamanı : "+includeTime)
+        }
+        title.innerText = document.title
+        sample.innerText ="************************************ CW7 ***********************************************\n******************************** FONKSİYONLARI *****************************************\n\n"+ Course+"\n"+readCourses+"\n"+findBest+"\n\n\n************************************ HMW2 **********************************************\n******************************** FONKSİYONLARI *****************************************\n\n"+exam_Schedule_Given_Student+"\n"+student_List_Taking_Given_Course+"\n"+course_List_Given_Exam_Room+"\n"+total_Courses_Given_Room+"\n"+course_List_Given_Date+"\n"+data_Sets_Comparison
+        readStudents(); 
+        readCourses();
+        </script>
+    </body>
+</html>
