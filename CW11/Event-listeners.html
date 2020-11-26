@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)https://blm-fsmvu.github.io/305/work/CW6.html -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="https://blm-fsmvu.github.io/305/images/icon192.png">
+    <title>Event listeners</title>
+
+  <style> /* CSS comment */
+    body { max-width: 440px; }
+    #url { width: 190px; }
+    span, #url { color: blue; }
+  </style>
+</head>
+
+<body>   <!-- HTML comment: Modify all items marked xxx -->
+
+<h1 id="title" title="Modify xxx">Event listeners</h1>
+<h3 id="batrystatus" title="Modify xxx">Batery Status</h3>
+    <p id="batry"></p>
+    <p title="Battery level">Battery level: <span id="level">78%</span></p>
+<p id="chargtime"></p>
+<h3>Online Status</h3>
+    <p id="online_status">Online Status : </p>
+<h3 id="keyboard">Keyboard</h3>
+    <p id="key"></p>
+<hr>
+
+<b>Sample code</b>
+<pre id="sample">function init() {<br>    plat.innerText = navigator.platform<br>    navigator.geolocation.getCurrentPosition(p =&gt; <br>      loc.innerText = p.coords.latitude.toFixed(4)<br>                +', '+p.coords.longitude.toFixed(4)<br>    )<br>    navigator.getBattery().then(b =&gt; <br>      level.innerText = 100*b.level+'%'<br>    )<br>    check()<br>}<br>function check() {<br>    fetch(url.value).then(r =&gt; <br>      resp.innerText = r.ok? 'OK' : 'Not found'<br>    ).catch(e =&gt; resp.innerText = e)<br>}</pre>
+<hr>
+
+<script>
+"use strict";
+// JavaScript comment
+function check() {
+}
+function init() {
+    navigator.getBattery().then(b =>{
+      b.onchargingchange = () =>{
+        batry.innerText =(b.charging ? "Charging..." : "Discharging...")     
+        let time=b.dischargingTime/3600   
+        chargtime.innerText=time.toFixed(2)+" hours Remaining"   
+      } 
+      b.onlevelchange = () =>{
+        level.innerText = 100*b.level+'%'          
+      }   
+
+      ononline = (event) => online_status.innerText = "ONLİNE"
+      onoffline = (event) => online_status.innerText = "OFLİNE"
+
+      onkeydown = () => key.innerText = event.key
+      onkeyup = () => key.innerText = event.key   
+    }); 
+    
+}
+      
+    title.innerText = document.title;
+    sample.innerText = init+'\n'+check;
+    init();
+</script>
+</body></html>
