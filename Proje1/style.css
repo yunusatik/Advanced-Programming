@@ -2,7 +2,7 @@
 
             * 
             {
-                margin:0%;
+                margin:02%;
                 padding: 0%;
                 box-sizing: border-box;
             }
@@ -15,7 +15,7 @@
                 align-items: center;
                 justify-content: center;
                 font-family: "Poppins", sans-serif;
-                padding-left: 10px;
+                padding-left: 3px;
                 max-width: 570px;
                 min-height: 100px;
             }
@@ -24,12 +24,12 @@
                 font-weight: bold;
                 margin-left: -1.9rem;
                 margin-top: +3rem;
-                max-width: 127%;
-                background-color: #2a2a72;
-                border-radius: 10px;
+                max-width: 123%;
+                background-color: #8f384d;
+                border-radius: 80px;
                 text-align: center;
                 display: inline-block;
-                color: white;
+                color: #ffba93;
                 font-size: 0.7rem;
                 padding: 0.25rem 1.9rem;
                 margin: 2.9rem -2.1rem;
@@ -48,13 +48,12 @@
                 font-family: inherit;
                 font-size: 1rem;
                 padding: 1rem;
-                margin-bottom: 1rem;
+                margin-bottom: 6rem;
                 margin-left: -0.7rem;
             }
 
             input::placeholder {
                 color: rgb(15, 6, 6);
-                
             }
 
             input:focus {
@@ -69,7 +68,8 @@
                 display: block;
                 padding: 3rem;
                 margin-left: -0.7rem;
-                max-width: 350px;
+                margin-top: -6rem;
+                max-width: 369px;
                 box-shadow: 1px 1px 10px 2px rgba(1, 1, 1, 1);
                 
             }
@@ -87,13 +87,7 @@
                 margin-top: -5.5rem;
             }
 
-            .info {
-                color: #eee;
-                margin-left: -9.5rem;
-                width: 280px;
-                height: 65%;
-                font-size: 100%;
-            }
+           
 
             .user-info {
                 color: #eee;
@@ -103,9 +97,23 @@
                 height: 200px;
                 font-size: 100%;
             }
+            .info {
+                color: #eee;
+                margin-left: -9.5rem;
+                width: 150%;
+                height: 65%;
+               
+            }
 
             .user-info h2 {
+                width: 120%;
                 margin-top: 0;
+                text-align: center;
+            }
+            .user-info p {
+                width: 110%;
+                margin-top: 0;
+                text-align: center;
             }
 
             .user-info ul {
@@ -119,6 +127,7 @@
             .user-info ul li {
                 display: flex;
                 align-items: center;
+                margin-top: 50px;
             }
 
             .user-info ul li strong {
