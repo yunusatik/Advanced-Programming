@@ -28,7 +28,6 @@ function createUserCard(user) {
         <div class="container">
             <div class="card">
                 <img class="avatar" src="${user.avatar_url}" alt="${user.name}" />
-                &nbsp;&nbsp;&nbsp;&nbsp;    
                 <div class="user-info">
                     <h2>${user.name}</h2>
                     <p>${user.bio}</p>
