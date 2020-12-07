@@ -32,7 +32,7 @@
                 color: #ffba93;
                 font-size: 0.7rem;
                 padding: 0.25rem 1.9rem;
-                margin: 2.9rem -2.1rem;
+                margin: 5.9rem -2.1rem;
                 margin-right: 0.6rem;
                 margin-bottom: 0.5rem;
                 text-decoration: none;
@@ -103,6 +103,7 @@
                 margin-left: -9.5rem;
                 width: 150%;
                 height: 65%;
+                
                
             }
 
@@ -128,7 +129,7 @@
             .user-info ul li {
                 display: flex;
                 align-items: center;
-                margin-top: -30px;
+                margin-top: 10%;
                
             }
 
