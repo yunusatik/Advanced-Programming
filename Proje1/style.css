@@ -76,6 +76,7 @@
             .card {
                 display: flex;
                 padding: 3rem;
+                max-height: 170px;
             }
             
             .avatar {
@@ -127,7 +128,8 @@
             .user-info ul li {
                 display: flex;
                 align-items: center;
-                margin-top: 50px;
+                margin-top: -30px;
+               
             }
 
             .user-info ul li strong {
