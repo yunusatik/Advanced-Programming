@@ -160,7 +160,7 @@ function showProfile() {
 function removeFile(fileId){
   gapi.client.drive.files.delete({fileId}).then(execute,error)
 }
-function displayFile(fileUd){
+function displayFile(fileId){
   gapi.client.drive.files.get({fileId,alt:"media"}).then(r => data.innerText = r.body,error)  
 }
 const reader = new FileReader(),
