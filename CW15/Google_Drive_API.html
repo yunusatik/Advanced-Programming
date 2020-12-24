@@ -18,6 +18,16 @@
         overflow-x: auto;
         line-height: 1.5;
     }
+    b {
+
+      border: 1px solid;
+      color: red;
+      padding: 3px;
+    }
+    b, u {
+
+      cursor: pointer;
+    }
   </style>
 
 </head>
@@ -37,6 +47,7 @@
 <button id="upload" disabled="" onclick="button.click()">Upload</button>
 &nbsp;<span id="user"></span>
 <pre id="out"></pre>
+  <pre id="data"></pre>
 
 <script src="./Google Drive API_files/cb=gapi.loaded_0" async=""></script><script src="./Google Drive API_files/api.js.indir" gapi_processed="true"></script>
 <script>
@@ -145,6 +156,12 @@ function showProfile() {
     image.src = p.getImageUrl()
     user.innerText = p.getEmail()
 }
+function removeFile(fileId){
+  gapi.client.drive.files.delete({fielId}).then(execute,error)
+}
+function displayFile(fileUd){
+  gapi.client.drive.files.get({fielId,alt:"media"}).then(r => data.innerText = r.body,error)  
+}
 const reader = new FileReader(),
   apiKey = 'AIzaSyACcNicRLeLl50EFKxhiULjgrkmRZatggI',
   clientId = "907940225329-coj852rfff5562qs47cqs79f468gqne9.apps.googleusercontent.com",
@@ -154,6 +171,13 @@ async function init() {
     if (currentUser().getId()) try {
       showFiles()
     } catch (e) { error(e) }  
+   out.onclick = (e) => {
+    let t = e.target
+    if (!t || !t.id) return
+    if (t.tagName == 'B') 
+         removeFile(t.id)
+    else displayFile(t.id)
+    }
 }
 const ORIGIN = "https://yunusatik.github.io"
 if (location.host.includes('github') && location.origin != ORIGIN)
