@@ -106,15 +106,13 @@ function report(response) {
     let a = f.map(fileToString)
     out.innerHTML = a.join('\n'); console.log(f)
     files = f.map(x => x.id+' '+x.name)
-    data.innerText = ''
 }
 function fileToString(x) {
     let [d, h, m] = x.modifiedTime.split(/[T:]/)
     let s = x.size.padStart(9) //padding with blanks
     let b = '<b id=' + x.id + '>x</b>'
     let u = '<u id=' + x.id + '>' + x.name + '</u>'
-    let a = '<a href='+x.webViewLink+' target=drive>'+x.name+'</a>'
-    return d+' '+h+':'+m+' '+s+'  '+a
+    return d + ' ' + h + ':' + m + ' ' + s + '  ' + b + ' ' + u;
 }
 function isText(f) {
     console.assert(f instanceof File);
