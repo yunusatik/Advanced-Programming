@@ -3,8 +3,6 @@
 <html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <meta name="viewport" content="width=device-width">
-  <meta name="author" content="M A Eyler, Istanbul, 2020">
-  <link rel="icon" href="https://maeyler.github.io/305/images/icon192.png">
   <title>Google Drive API</title>
 
   <style>
@@ -19,10 +17,10 @@
         line-height: 1.5;
     }
     b {
-
+      padding: 3px;
       border: 1px solid;
       color: red;
-      padding: 3px;
+        
     }
     b, u {
 
@@ -47,7 +45,7 @@
 <button id="upload" disabled="" onclick="button.click()">Upload</button>
 &nbsp;<span id="user"></span>
 <pre id="out"></pre>
-  <pre id="data"></pre>
+<pre id="data"></pre>
 
 <script src="./Google Drive API_files/cb=gapi.loaded_0" async=""></script><script src="./Google Drive API_files/api.js.indir" gapi_processed="true"></script>
 <script>
@@ -108,10 +106,13 @@ function report(response) {
     let a = f.map(fileToString)
     out.innerHTML = a.join('\n'); console.log(f)
     files = f.map(x => x.id+' '+x.name)
+    data.innerText = ''
 }
 function fileToString(x) {
     let [d, h, m] = x.modifiedTime.split(/[T:]/)
     let s = x.size.padStart(9) //padding with blanks
+    let b = '<b id=' + x.id + '>x</b>'
+    let u = '<u id=' + x.id + '>' + x.name + '</u>'
     let a = '<a href='+x.webViewLink+' target=drive>'+x.name+'</a>'
     return d+' '+h+':'+m+' '+s+'  '+a
 }
@@ -157,10 +158,10 @@ function showProfile() {
     user.innerText = p.getEmail()
 }
 function removeFile(fileId){
-  gapi.client.drive.files.delete({fielId}).then(execute,error)
+  gapi.client.drive.files.delete({fileId}).then(execute,error)
 }
 function displayFile(fileUd){
-  gapi.client.drive.files.get({fielId,alt:"media"}).then(r => data.innerText = r.body,error)  
+  gapi.client.drive.files.get({fileId,alt:"media"}).then(r => data.innerText = r.body,error)  
 }
 const reader = new FileReader(),
   apiKey = 'AIzaSyACcNicRLeLl50EFKxhiULjgrkmRZatggI',
